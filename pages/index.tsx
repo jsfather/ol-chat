@@ -5,8 +5,6 @@ import {fetchTagsData, setSelectedTag} from '@/lib/slices/tagsSlice';
 import {Tag} from '@/types/tags';
 import {FaArrowUp, FaSpinner} from 'react-icons/fa';
 import {sendMessage, fetchChat} from '@/lib/slices/chatSlice';
-import {documentToReactComponents} from '@contentful/rich-text-react-renderer';
-
 
 export default function Home() {
     const dispatch: AppDispatch = useDispatch();
