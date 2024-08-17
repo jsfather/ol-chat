@@ -43,9 +43,15 @@ const chatSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(sendMessage.pending, (state) => {
+            .addCase(sendMessage.pending, (state, action) => {
                 state.status = 'loading';
                 state.error = null;
+                state.data.push({
+                    message: {
+                        role: 'user',
+                        content: action.meta.arg,
+                    },
+                });
             })
             .addCase(sendMessage.fulfilled, (state, action: PayloadAction<any>) => {
                 state.status = 'succeeded';
