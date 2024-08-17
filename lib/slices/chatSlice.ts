@@ -17,7 +17,7 @@ export const fetchChat = createAsyncThunk(
     }
 );
 
-export const sendMessage = createAsyncThunk('chat/sendMessage', async (content: string, {getState, dispatch}) => {
+export const sendMessage = createAsyncThunk('chat/sendMessage', async (content: string, {getState}) => {
     const state = getState() as RootState;
     const selectedTag = state.tags.selectedTag;
     const response = await axios.post<Chat>('http://127.0.0.1:11434/api/chat', JSON.stringify({
