@@ -9,17 +9,19 @@ const initialState: ChatState = {
     error: null,
 };
 
-export const chatState = createAsyncThunk(
+export const fetchChat = createAsyncThunk(
     'chat/chatState',
     async (_, {getState}) => {
         const state = getState() as RootState
-        state.chat.data
+        return state.chat.data
     }
 );
 
 export const sendMessage = createAsyncThunk('chat/sendMessage', async (content: string, {getState, dispatch}) => {
+    const state = getState() as RootState;
+    const selectedTag = state.tags.selectedTag;
     const response = await axios.post<Chat>('http://127.0.0.1:11434/api/chat', JSON.stringify({
-        model: 'phi3:mini',
+        model: selectedTag?.model,
         messages: [
             {
                 role: 'user',
@@ -32,9 +34,7 @@ export const sendMessage = createAsyncThunk('chat/sendMessage', async (content: 
             'Content-Type': 'application/json',
         }
     });
-
-    const state = getState() as RootState
-    state.chat.data.push(response.data)
+    return response.data
 });
 
 const chatSlice = createSlice({
