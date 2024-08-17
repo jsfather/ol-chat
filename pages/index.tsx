@@ -23,6 +23,7 @@ export default function Home() {
 
     const handleSendMessage = () => {
         dispatch(sendMessage(input));
+        setInput('')
     };
 
     useEffect(() => {
@@ -40,7 +41,7 @@ export default function Home() {
             className="text-white w-1/2 mx-auto text-sm p-4 flex flex-col justify-end h-[calc(100vh-100px)]">
             {chatData.map((chat, chat_index) => <div key={chat_index}
                                                      className={`${chat.message.role === 'user' ? 'justify-end' : 'justify-start'} flex my-4`}>
-                <div className="rounded-3xl p-6 bg-gray-800 min-w-24 text-center">{chat.message.content}</div>
+                <div className="rounded-3xl py-4 px-6 bg-gray-800 max-w-[80%] text-start">{chat.message.content}</div>
             </div>)}
         </div>
         <form className="w-1/2 mx-auto rounded-3xl fixed bottom-6 right-0 left-0 bg-gray-800">
@@ -58,6 +59,9 @@ export default function Home() {
                 <div className="relative w-full">
                     <input value={input}
                            onChange={(e) => setInput(e.target.value)}
+                           onKeyDown={(e) => {
+                               if (e.key === "Enter") {handleSendMessage()}
+                           }}
                            type="search" id="location-search"
                            disabled={tagsData.length === 0 || chatStatus === 'loading'}
                            className=" p-4 w-full z-20 bg-transparent text-white text-lg border-none focus:ring-0 disabled:text-gray-600"
@@ -66,7 +70,8 @@ export default function Home() {
                     <button onClick={handleSendMessage} disabled={chatStatus === 'loading' || input.length === 0}
                             type="button"
                             className="absolute top-0 end-0 h-full p-5 bg-blue-700 rounded-e-3xl disabled:bg-gray-700">
-                        {chatStatus === 'loading' ? <FaSpinner className="animate-spin"/> : <FaArrowUp/>}
+                        {chatStatus === 'loading' ? <FaSpinner className="animate-spin text-gray-500"/> :
+                            <FaArrowUp className="text-gray-200"/>}
                         <span className="sr-only">Search</span>
                     </button>
                 </div>
