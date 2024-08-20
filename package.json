@@ -12,10 +12,15 @@
   "dependencies": {
     "@nuxt/icon": "^1.4.5",
     "@nuxtjs/tailwindcss": "^6.12.1",
+    "@pinia/nuxt": "^0.5.3",
     "nuxt": "^3.12.4",
+    "pinia": "^2.2.2",
     "vue": "latest"
   },
   "devDependencies": {
     "nuxt-headlessui": "^1.2.0"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }
