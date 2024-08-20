@@ -14,7 +14,6 @@ const message = ref('')
 const chatStore = useChatStore()
 
 async function sendMessage() {
-
   await chatStore.sendMessage({role: 'user', content: message.value})
 }
 </script>
@@ -28,11 +27,12 @@ async function sendMessage() {
       </div>
       <input v-model="message" type="search" id="default-search"
              class="block w-full p-4 ps-10 text-gray-200 rounded-3xl bg-gray-700 focus:outline-none"
-             :placeholder="`Ask ${selectedTag?.details?.family} anything...`" required/>
+             :placeholder="`Ask ${selectedTag?.details?.family} anything...`" required :disabled="chatStore.isLoading"/>
       <button type="submit"
               class="absolute end-2.5 bottom-3 bg-white disabled:bg-gray-500 rounded-full p-2.5 text-center inline-flex items-center"
               :disabled="message === '' || chatStore.isLoading">
-        <Icon name="material-symbols:arrow-upward" size="15"></Icon>
+        <Icon v-if="!chatStore.isLoading" name="material-symbols:arrow-upward" size="15"></Icon>
+        <Icon v-else name="material-symbols:square-rounded" size="15" class="text-gray-300"></Icon>
       </button>
     </div>
   </form>
