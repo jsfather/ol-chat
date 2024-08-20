@@ -13,10 +13,3 @@ export interface Tag {
         "quantization_level": string
     }
 }
-
-export interface TagsState {
-    data: Tag[];
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
-    error: string | null;
-    selectedTag: Tag | null,
-}
