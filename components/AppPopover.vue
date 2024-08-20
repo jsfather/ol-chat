@@ -36,7 +36,7 @@ function updateModel(value: Item) {
         leave-to-class="translate-y-1 opacity-0"
     >
       <HeadlessPopoverPanel
-          class="z-10 mt-3 max-w-sm"
+          class="z-10 mt-3 absolute left-0 w-1/3"
       >
         <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
           <div v-if="props.items" class="relative grid bg-gray-700 p-2">
