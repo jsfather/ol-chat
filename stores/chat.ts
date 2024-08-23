@@ -1,4 +1,5 @@
 import type {Chat} from "@/types/chat"
+import type {Error} from "@/types/error"
 
 interface Message {
     role: string,
@@ -16,6 +17,7 @@ export const useChatStore = defineStore('chatStore', {
             this.isLoading = true
             this.chatHistory.push(message)
             const tagStore = useTagStore()
+            const toastStore = useToastStore()
 
             try {
                 const data = await $fetch<Chat>('http://localhost:11434/api/chat', {
@@ -23,8 +25,8 @@ export const useChatStore = defineStore('chatStore', {
                     body: {model: tagStore.selectedTag.model, stream: false, messages: this.chatHistory}
                 })
                 this.chatHistory.push({role: data.message.role, content: data.message.content})
-            } catch (error) {
-                this.error = 'Failed to send message. Please try again.';
+            } catch (error: Error | any) {
+                toastStore.addToast({message: error?.response._data.error, type: 'error', duration: 10000})
             } finally {
                 this.isLoading = false;
             }
