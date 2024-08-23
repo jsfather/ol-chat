@@ -55,7 +55,10 @@ const [parentToast] = useAutoAnimate()
          role="alert">
       <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg"
            :class="`${getTypeIconColor(item.type)} ${getTypeTextColor(item.type)}`">
-        <Icon name="material-symbols:error" size="24"></Icon>
+        <Icon v-if="item.type === 'error'" name="material-symbols:error" size="24"></Icon>
+        <Icon v-if="item.type === 'warning'" name="material-symbols:warning" size="24"></Icon>
+        <Icon v-if="item.type === 'info'" name="material-symbols:info" size="24"></Icon>
+        <Icon v-if="item.type === 'success'" name="material-symbols:check-circle" size="24"></Icon>
       </div>
       <div class="ms-3 text-sm font-normal">{{ item.message }}</div>
       <button type="button" class="ms-auto inline-flex hover:text-gray-600" @click="toastStore.deleteToast(item_index)">
