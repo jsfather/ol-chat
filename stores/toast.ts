@@ -12,6 +12,11 @@ export const useToastStore = defineStore('toastStore', {
                     const index = this.toasts.findIndex(item => item === toast);
                     this.deleteToast(index);
                 }, toast.duration);
+            } else if (typeof toast.duration === 'undefined') {
+                setTimeout(() => {
+                    const index = this.toasts.findIndex(item => item === toast);
+                    this.deleteToast(index);
+                }, 5000);
             }
         },
         deleteToast(index: number) {
