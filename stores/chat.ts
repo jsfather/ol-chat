@@ -26,7 +26,7 @@ export const useChatStore = defineStore('chatStore', {
                 })
                 this.chatHistory.push({role: data.message.role, content: data.message.content})
             } catch (error: Error | any) {
-                toastStore.addToast({message: error?.response._data.error, type: 'error', duration: 10000})
+                toastStore.addToast({message: error?.response._data.error, type: 'error'})
             } finally {
                 this.isLoading = false;
             }
