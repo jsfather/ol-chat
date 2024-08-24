@@ -45,7 +45,7 @@ function getTypeIconColor(type: string) {
 }
 
 const toastStore = useToastStore()
-const [parentToast] = useAutoAnimate()
+const [parentToast] = useAutoAnimate({duration: 100})
 </script>
 
 <template>
