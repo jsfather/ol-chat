@@ -6,18 +6,18 @@ export const useToastStore = defineStore('toastStore', {
     }),
     actions: {
         addToast(toast: Toast) {
+            if (!toast.duration) toast.duration = 5000
             this.toasts.unshift(toast)
-            if (toast.duration && toast.duration !== 'permanent') {
-                setTimeout(() => {
-                    const index = this.toasts.findIndex(item => item === toast);
-                    this.deleteToast(index);
-                }, toast.duration);
-            } else if (typeof toast.duration === 'undefined') {
-                setTimeout(() => {
-                    const index = this.toasts.findIndex(item => item === toast);
-                    this.deleteToast(index);
-                }, 5000);
-            }
+            const interval = setInterval(() => {
+                const index = this.toasts.findIndex(item => isEqual(item, toast));
+                if (this.toasts[index]?.duration) {
+                    this.toasts[index].duration = this.toasts[index].duration - 1000
+                    if (this.toasts[index].duration === 0) {
+                        this.deleteToast(index)
+                        clearInterval(interval)
+                    }
+                } else clearInterval(interval)
+            }, 1000)
         },
         deleteToast(index: number) {
             this.toasts.splice(index, 1)
