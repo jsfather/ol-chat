@@ -6,18 +6,19 @@ export const useToastStore = defineStore('toastStore', {
     }),
     actions: {
         addToast(toast: Toast) {
-            if (!toast.duration) toast.duration = 5000
+            if (toast.duration === undefined) toast.duration = 5000
+            if (toast.dismissible === undefined) toast.dismissible = true
             this.toasts.unshift(toast)
-            const interval = setInterval(() => {
-                const index = this.toasts.findIndex(item => isEqual(item, toast));
-                if (this.toasts[index]?.duration) {
-                    this.toasts[index].duration = this.toasts[index].duration - 1000
-                    if (this.toasts[index].duration === 0) {
+            if (toast.duration !== 'permanent') {
+                const interval = setInterval(() => {
+                    const index = this.toasts.findIndex(item => isEqual(item, toast));
+                    this.toasts[index].duration = Number(this.toasts[index].duration) - 1000
+                    if (Number(this.toasts[index].duration) <= 0) {
                         this.deleteToast(index)
                         clearInterval(interval)
                     }
-                } else clearInterval(interval)
-            }, 1000)
+                }, 1000)
+            }
         },
         deleteToast(index: number) {
             this.toasts.splice(index, 1)
