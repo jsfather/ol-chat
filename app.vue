@@ -1,6 +1,7 @@
 <template>
+  <NuxtLoadingIndicator/>
   <NuxtLayout/>
-  <AppToast />
+  <AppToast/>
 </template>
 <script setup lang="ts">
 </script>
