@@ -61,7 +61,8 @@ const [parentToast] = useAutoAnimate({duration: 100})
         <Icon v-if="item.type === 'success'" name="material-symbols:check-circle" size="24"></Icon>
       </div>
       <div class="ms-3 text-sm font-normal">{{ item.message }}</div>
-      <button type="button" class="ms-auto inline-flex hover:text-gray-600" @click="toastStore.deleteToast(item_index)">
+      <button v-if="item.dismissible" type="button" class="ms-auto inline-flex hover:text-gray-600"
+              @click="toastStore.deleteToast(item_index)">
         <Icon name="material-symbols:close" size="24"></Icon>
       </button>
     </div>
