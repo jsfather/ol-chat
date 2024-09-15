@@ -14,7 +14,13 @@ export const useTagStore = defineStore('tagStore', {
                 this.tags = data.models
                 this.selectedTag = data.models[0]
             } catch (error: Error | any) {
-                toastStore.addToast({message: error, type: 'error', duration: 'permanent'})
+                toastStore.addToast({message: error, type: 'error', duration: 'permanent', dismissible: false})
+                toastStore.addToast({
+                    message: 'Please ensure that Ollama is installed and running on port 11434 on your computer.',
+                    type: 'warning',
+                    duration: 'permanent',
+                    dismissible: false
+                })
             }
         },
         setSelectedTag(tag: Tag) {
