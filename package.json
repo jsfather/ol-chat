@@ -15,6 +15,7 @@
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@pinia/nuxt": "^0.5.3",
     "nuxt": "^3.12.4",
+    "openai": "^4.61.0",
     "pinia": "^2.2.2",
     "vue": "latest"
   },
