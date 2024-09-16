@@ -1,27 +1,35 @@
 <script setup lang="ts">
-import {faker} from '@faker-js/faker';
+import type {Model} from "~/types/model";
 
-const toastStore = useToastStore()
-
-import {SimpleFaker} from '@faker-js/faker';
-
-const customSimpleFaker = new SimpleFaker();
-
-function createFakeToast() {
-  toastStore.addToast({
-    message: faker.person.firstName() + ' loves ' + faker.music.songName(),
-    type: customSimpleFaker.helpers.arrayElement(["info", "error", "success", "warning"]),
-    duration: faker.number.int({min: 3, max: 20}) * 1000
-  })
-}
-
+const slms: Model[] = [{
+  name: 'Llama',
+  models: [
+    {name: 'llama3.1', parameters: '8B', size: '4.7GB'},
+    {name: 'llama3.1:70b', parameters: '70B', size: '40GB'},
+    {name: 'llama3.1:405b', parameters: '405B', size: '231GB'}
+  ]
+}, {
+  name: 'Phi 3',
+  models: [
+    {name: 'phi3', parameters: '3.8B', size: '2.3GB'},
+    {name: 'phi3:medium', parameters: '14B', size: '7.9GB'},
+  ]
+}]
 </script>
 <template>
-  <button type="button"
-          class="text-white m-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-          @click="createFakeToast">
-    Show fake toast
-  </button>
+  <div
+      class="flex flex-col overflow-y-auto overflow-x-hidden scroll-smooth w-full h-full scrollbar scrollbar-thumb-slate-900 scrollbar-track-transparent pb-4">
+    <div class="w-1/2 flex flex-col self-center">
+      <div class="text-center text-5xl text-white mt-6">GPTs</div>
+      <div class="text-center text-gray-400 mt-2">Discover and create custom versions of ChatGPT that combine
+        instructions, extra knowledge, and any
+        combination of skills.
+      </div>
+      <div class="grid grid-cols-2 gap-4 mt-6">
+        <app-model-card v-for="item in slms" :model="item"/>
+      </div>
+    </div>
+  </div>
 </template>
 <style scoped>
 </style>
