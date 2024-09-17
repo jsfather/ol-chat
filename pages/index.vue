@@ -9,6 +9,10 @@ watch(selectedTag, (newValue) => {
   tagStore.setSelectedTag(newValue)
 });
 
+useHead({
+  title: 'Ask ' + tagStore.selectedTag.name + '...'
+})
+
 const message = ref('')
 const messageRef = ref()
 
