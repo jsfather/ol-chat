@@ -1,19 +1,22 @@
 <script setup lang="ts">
-import type {Model} from "~/types/model";
+import type {Tag} from "~/types/tag";
 
-const slms: Model[] = [{
-  name: 'Llama',
-  models: [
-    {name: 'llama3.1', parameters: '8B', size: '4.7GB'},
-    {name: 'llama3.1:70b', parameters: '70B', size: '40GB'},
-    {name: 'llama3.1:405b', parameters: '405B', size: '231GB'}
-  ]
-}, {
-  name: 'Phi 3',
-  models: [
-    {name: 'phi3', parameters: '3.8B', size: '2.3GB'},
-    {name: 'phi3:medium', parameters: '14B', size: '7.9GB'},
-  ]
+const models: Tag[] = [{
+  name: "phi3:mini",
+  model: "phi3:mini",
+  modified_at: new Date("2024-09-16T16:53:18.5079088+03:30"),
+  size: 2176178913,
+  digest: "4f222292793889a9a40a020799cfd28d53f3e01af25d48e06c5e708610fc47e9",
+  details: {
+    parent_model: "",
+    format: "gguf",
+    family: "phi3",
+    families: [
+      "phi3"
+    ],
+    parameter_size: "3.8B",
+    quantization_level: "Q4_0"
+  }
 }]
 </script>
 <template>
@@ -26,7 +29,7 @@ const slms: Model[] = [{
         combination of skills.
       </div>
       <div class="grid grid-cols-2 gap-4 mt-6">
-        <app-model-card v-for="item in slms" :model="item"/>
+        <app-model-card v-for="model in models" :model="model"/>
       </div>
     </div>
   </div>
