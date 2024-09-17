@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type {Tag} from "~/types/tag";
 
+const tagStore = useTagStore()
+
+await callOnce(tagStore.fetchAll)
+
 const models: Tag[] = [{
   name: "phi3:mini",
   model: "phi3:mini",
@@ -15,6 +19,22 @@ const models: Tag[] = [{
       "phi3"
     ],
     parameter_size: "3.8B",
+    quantization_level: "Q4_0"
+  }
+}, {
+  name: "qwen2:0.5b",
+  model: "qwen2:0.5b",
+  modified_at: new Date("2024-09-17T14:16:53.659402907+03:30"),
+  size: 352164041,
+  digest: "6f48b936a09f7743c7dd30e72fdb14cba296bc5861902e4d0c387e8fb5050b39",
+  details: {
+    parent_model: "",
+    format: "gguf",
+    family: "qwen2",
+    families: [
+      "qwen2"
+    ],
+    parameter_size: "494.03M",
     quantization_level: "Q4_0"
   }
 }]
