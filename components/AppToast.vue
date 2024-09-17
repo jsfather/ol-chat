@@ -45,19 +45,24 @@ function getTypeIconColor(type: string) {
 }
 
 const toastStore = useToastStore()
+const [parentToast] = useAutoAnimate({duration: 100})
 </script>
 
 <template>
-  <div class="flex flex-col fixed top-0 right-4 w-full max-w-xs">
-    <div v-for="item in toastStore.toasts" class="mt-4 flex items-center p-4 rounded-lg shadow"
+  <div ref="parentToast" class="flex flex-col fixed top-0 right-4 w-full max-w-xs">
+    <div v-for="(item, item_index) in toastStore.toasts" class="mt-4 flex items-center p-4 rounded-lg shadow"
          :class="getTypeColor(item.type)"
          role="alert">
       <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg"
            :class="`${getTypeIconColor(item.type)} ${getTypeTextColor(item.type)}`">
-        <Icon name="material-symbols:error" size="24"></Icon>
+        <Icon v-if="item.type === 'error'" name="material-symbols:error" size="24"></Icon>
+        <Icon v-if="item.type === 'warning'" name="material-symbols:warning" size="24"></Icon>
+        <Icon v-if="item.type === 'info'" name="material-symbols:info" size="24"></Icon>
+        <Icon v-if="item.type === 'success'" name="material-symbols:check-circle" size="24"></Icon>
       </div>
       <div class="ms-3 text-sm font-normal">{{ item.message }}</div>
-      <button type="button" class="ms-auto inline-flex hover:text-gray-600">
+      <button v-if="item.dismissible" type="button" class="ms-auto inline-flex hover:text-gray-600"
+              @click="toastStore.deleteToast(item_index)">
         <Icon name="material-symbols:close" size="24"></Icon>
       </button>
     </div>

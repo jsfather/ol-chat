@@ -19,7 +19,7 @@ function updateModel(value: Item) {
     <HeadlessPopoverButton
         class="inline-flex items-center rounded-lg px-3 py-2 text-gray-300 font-bold text-lg focus:outline-none hover:bg-slate-700 focus:bg-slate-700"
     >
-      <span>{{ model ? model?.name : 'Select' }}</span>
+      <span>{{ model?.name ?? 'Select' }}</span>
       <Icon
           name="mdi:chevron-down"
           class="ml-2 h-5 w-5 transition duration-150 ease-in-out text-base"
@@ -39,7 +39,7 @@ function updateModel(value: Item) {
           class="z-10 mt-3 absolute left-0 w-1/4"
       >
         <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
-          <div v-if="props.items" class="relative grid bg-gray-700 p-2">
+          <div v-if="props?.items?.length !== 0" class="relative grid bg-gray-700 p-2">
             <div
                 v-for="item in props.items"
                 :key="item.model"

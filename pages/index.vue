@@ -48,8 +48,9 @@ function scrollToEnd(elementId: string) {
           </div>
           <input ref="messageRef" v-model="message"
                  class="block w-full p-4 ps-10 text-gray-200 rounded-3xl bg-gray-700 focus:outline-none"
-                 :placeholder="`Ask ${selectedTag?.details?.family} anything...`" required
-                 :disabled="chatStore.isLoading"/>
+                 :placeholder="`${selectedTag?.model  ? `Ask ${selectedTag?.details?.family} anything...` : 'Select a model to continue' }`"
+                 required
+                 :disabled="chatStore.isLoading || !selectedTag?.model"/>
           <button type="submit"
                   class="absolute end-2.5 bottom-3 bg-white disabled:bg-gray-500 rounded-full p-2.5 text-center inline-flex items-center"
                   :disabled="message === '' || chatStore.isLoading">
