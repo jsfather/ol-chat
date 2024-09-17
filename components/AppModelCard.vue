@@ -1,25 +1,28 @@
 <script setup lang="ts">
-import type {Model} from "~/types/model";
+import type {Tag} from "~/types/tag";
+import {bytesToGB} from "~/utils";
 
-const props = withDefaults(defineProps<{ model: Model }>(), {})
-
-const selectedModel = ref<{ name: string, parameters: string, size: string } | null>(props.model.models[0])
+const props = withDefaults(defineProps<{ model: Tag }>(), {})
 </script>
 
 <template>
   <div class="p-4 rounded-2xl hover:bg-slate-700 flex flex-row items-center justify-between">
     <div class="flex flex-col h-full">
       <div class="text-white text-2xl">{{ model.name }}</div>
-      <div class="flex flex-row flex-wrap gap-4 mt-2">
-        <div v-for="item in model.models"
-             class="rounded-md py-0.5 px-2.5 border border-transparent text-sm text-gray-400 transition-all text-nowrap cursor-pointer select-none"
-             :class="{'bg-slate-900 text-white': isEqual(item , selectedModel)}"
-             @click="isEqual(item , selectedModel) ? selectedModel = null : selectedModel = item">
-          {{ item.parameters }} : {{ item.size }}
-        </div>
+      <div class="text-gray-400 text-sm mt-1">{{ model.details.family }}</div>
+      <div class="flex flex-row flex-wrap gap-2 mt-2">
+        <app-chips>
+          {{ model.details.parameter_size }}
+        </app-chips>
+        <app-chips>
+          {{bytesToGB(model.size)}}GB
+        </app-chips>
+        <app-chips>
+          {{ model.details.quantization_level }}
+        </app-chips>
       </div>
     </div>
-    <button :disabled="!selectedModel" class="text-primary disabled:text-gray-500">
+    <button class="text-primary disabled:text-gray-500">
       <Icon name="material-symbols:download" size="30"></Icon>
     </button>
 
