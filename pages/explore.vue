@@ -37,7 +37,25 @@ const models: Tag[] = [{
     parameter_size: "494.03M",
     quantization_level: "Q4_0"
   }
-}]
+},
+  {
+    name: "gemma2:2b",
+    model: "gemma2:2b",
+    modified_at: new Date("2024-09-18T09:31:52.325398247+03:30"),
+    size: 1629518495,
+    digest: "8ccf136fdd5298f3ffe2d69862750ea7fb56555fa4d5b18c04e3fa4d82ee09d7",
+    details: {
+      parent_model: "",
+      format: "gguf",
+      family: "gemma2",
+      families: [
+        "gemma2"
+      ],
+      parameter_size: "2.6B",
+      quantization_level: "Q4_0"
+    }
+  }
+]
 </script>
 <template>
   <div
