@@ -9,8 +9,12 @@ watch(selectedTag, (newValue) => {
   tagStore.setSelectedTag(newValue)
 });
 
+const pageTitle = computed(() => {
+  return 'Ask ' + tagStore.selectedTag.name + '...'
+})
+
 useHead({
-  title: 'Ask ' + tagStore.selectedTag.name + '...'
+  title: pageTitle
 })
 
 const message = ref('')
