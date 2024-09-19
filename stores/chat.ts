@@ -1,16 +1,10 @@
 import type {Error} from "@/types/error"
-import OpenAI from 'openai'
+import ollama from 'ollama'
 
 interface Message {
     role: string,
     content: string
 }
-
-const openai = new OpenAI({
-    baseURL: 'http://localhost:11434/v1/',
-    apiKey: 'ollama',
-    dangerouslyAllowBrowser: true
-});
 
 export const useChatStore = defineStore('chatStore', {
     state: () => ({
@@ -26,19 +20,19 @@ export const useChatStore = defineStore('chatStore', {
             const toastStore = useToastStore()
 
             try {
-                const stream = await openai.chat.completions.create({
+                const response = await ollama.chat({
                     model: tagStore.selectedTag.model,
                     messages: this.chatHistory,
-                    stream: true,
+                    stream: true
                 })
                 let executed = false;
-                for await (const part of stream) {
+                for await (const part of response) {
                     if (executed) {
-                        this.chatHistory[this.chatHistory.length - 1].content = this.chatHistory[this.chatHistory.length - 1].content + part.choices[0]?.delta?.content || ''
+                        this.chatHistory[this.chatHistory.length - 1].content = this.chatHistory[this.chatHistory.length - 1].content + part.message.content
                     } else {
                         this.chatHistory.push({
-                            role: part.choices[0]?.delta?.role || '',
-                            content: part.choices[0]?.delta?.content || ''
+                            role: part.message.role,
+                            content: part.message.content
                         })
                         executed = true
                     }
