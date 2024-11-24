@@ -1,75 +1,45 @@
-# Nuxt 3 Minimal Starter
+# Ol-Chat
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Ol-Chat is a Nuxt.js application designed to interact with [Ollama](https://ollama.ai), a local interface for working
+with large language models (LLMs). With Ol-Chat, you can download an LLM and start chatting with it seamlessly.
 
-## Setup
+## Prerequisites
 
-Make sure to install the dependencies:
+1. **Ollama Installed**  
+   Make sure [Ollama](https://ollama.ai) is installed on your device. Ollama usually serves on port `11434`.
 
-```bash
-# npm
-npm install
+2. **Node.js**  
+   Ensure you have Node.js installed to run this application.
 
-# pnpm
-pnpm install
+## Features
 
-# yarn
-yarn install
+- **LLM Management**: Download and manage large language models locally.
+- **Chat Interface**: Communicate with the LLM directly via an intuitive UI.
 
-# bun
-bun install
-```
+## Installation
 
-## Development Server
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/jsfather/ol-chat.git
+   cd ol-chat
+   ```
 
-Start the development server on `http://localhost:3000`:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```bash
-# npm
-npm run dev
+## Usage
 
-# pnpm
-pnpm run dev
+1. Start the Nuxt application:
+   ```bash
+   npm run dev
+   ```
 
-# yarn
-yarn dev
+2. Ensure Ollama is running on your device (default port 11434).
+3. Open your browser and navigate to:
 
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+   ```bash
+    http://localhost:3000
+   ```
+4. Download a model through the interface and start chatting!
