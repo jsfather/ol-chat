@@ -10,7 +10,7 @@ watch(selectedTag, (newValue) => {
 });
 
 const pageTitle = computed(() => {
-  return 'Ask ' + tagStore.selectedTag.name + '...'
+  return 'Ask ' + tagStore.selectedTag?.name ?? 'me' + '...'
 })
 
 useHead({
