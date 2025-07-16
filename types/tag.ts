@@ -8,7 +8,7 @@ export interface Tag {
         parent_model: string,
         format: string,
         family: string,
-        families: string[],
+        families: string[] | null,
         "parameter_size": string,
         "quantization_level": string
     }
