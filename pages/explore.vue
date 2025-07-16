@@ -6,6 +6,20 @@ const tagStore = useTagStore()
 await callOnce(tagStore.fetchAll)
 
 const models: Tag[] = [{
+  name: "codellama:7b",
+  model: "codellama:7b",
+  modified_at: new Date("2025-07-16T17:00:27.974372+03:30"),
+  size: 3825910662,
+  digest: "8fdf8f752f6e80de33e82f381aba784c025982752cd1ae9377add66449d2225f",
+  details: {
+    parent_model: "",
+    format: "gguf",
+    family: "llama",
+    families: null,
+    parameter_size: "7B",
+    quantization_level: "Q4_0"
+  }
+}, {
   name: "phi3:mini",
   model: "phi3:mini",
   modified_at: new Date("2024-09-16T16:53:18.5079088+03:30"),
