@@ -43,3 +43,22 @@ with large language models (LLMs). With Ol-Chat, you can download an LLM and sta
     http://localhost:3000
    ```
 4. Download a model through the interface and start chatting!
+
+## Docker Usage
+
+1. Build the Docker image:
+   ```bash
+   docker build -t ol-chat .
+   ```
+
+2. Run the container:
+   ```bash
+   docker run -p 54321:3000 ol-chat
+   ```
+
+3. Open your browser and navigate to:
+   ```bash
+   http://localhost:54321
+   ```
+
+**Note:** Make sure Ollama is running on your host machine at `localhost:11434` for the Docker container to access it.
