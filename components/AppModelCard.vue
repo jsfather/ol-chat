@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import type {Tag} from "~/types/tag";
-import {bytesToGB} from "~/utils";
-import ollama from "ollama";
-import type {Error} from "~/types/error";
+import type {Tag} from "@/types/tag";
+import {bytesToGB} from "@/utils";
+import type {Error} from "@/types/error";
 
 const props = withDefaults(defineProps<{ model: Tag }>(), {})
 const toastStore = useToastStore()
@@ -11,28 +10,59 @@ const downloadLoading = ref(false)
 const downloadProgress = ref()
 
 async function downloadModel(model: string) {
-  downloadLoading.value = true
+  downloadLoading.value = true;
+  const { endpoints } = useOllama();
+
   try {
-    const response = await ollama.pull({
-      model,
-      stream: true
-    })
-    for await (const part of response) {
-      if (part.status.indexOf('pulling') !== -1 && part.total != undefined) {
-        if (part.status === 'success') {
-          downloadLoading.value = false
-        } else {
-          downloadProgress.value = part.completed / part.total * 100
-          console.log(part)
-          console.log(downloadProgress.value)
+    const response = await fetch(endpoints.pull, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: model,
+        stream: true
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    if (!response.body) throw new Error('No stream in response');
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder('utf-8');
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunk = decoder.decode(value);
+      const lines = chunk.split('\n').filter(line => line.trim());
+
+      for (const line of lines) {
+        try {
+          const part = JSON.parse(line);
+          if (part.status === 'success') {
+            downloadLoading.value = false;
+            toastStore.addToast({ message: `Model ${model} downloaded successfully!`, type: 'success' });
+            // Refresh the tags to show the newly downloaded model
+            await tagStore.fetchAll();
+          } else if (part.status && part.status.includes('pulling') && part.total) {
+            downloadProgress.value = (part.completed / part.total) * 100;
+            console.log(`Download progress: ${downloadProgress.value.toFixed(1)}%`);
+          }
+        } catch (parseError) {
+          console.warn('Failed to parse JSON line:', line, parseError);
         }
       }
     }
   } catch (error: Error | any) {
-    downloadLoading.value = false
-    toastStore.addToast({message: error.message, type: 'error'})
+    console.error('Download error:', error);
+    toastStore.addToast({ message: error.message || 'Failed to download model', type: 'error' });
   } finally {
-    downloadLoading.value = false
+    downloadLoading.value = false;
   }
 }
 

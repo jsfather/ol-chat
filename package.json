@@ -14,13 +14,16 @@
     "@nuxt/icon": "^1.4.5",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@pinia/nuxt": "^0.5.3",
+    "highlight.js": "^11.11.1",
+    "markdown-it": "^14.1.0",
     "nuxt": "^3.12.4",
-    "ollama": "^0.5.9",
+    "ollama": "^0.5.16",
     "pinia": "^2.2.2",
     "vue": "latest"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "@types/markdown-it": "^14.1.2",
     "nuxt-headlessui": "^1.2.0",
     "nuxt-lodash": "^2.5.3",
     "tailwind-scrollbar": "^3.1.0"
