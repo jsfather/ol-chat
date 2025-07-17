@@ -53,7 +53,7 @@ with large language models (LLMs). With Ol-Chat, you can download an LLM and sta
 
 2. Run the container:
    ```bash
-   docker run -p 54321:3000 ol-chat
+   docker run -p 54321:3000 --restart=always -d ol-chat
    ```
 
 3. Open your browser and navigate to:
