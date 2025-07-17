@@ -45,7 +45,7 @@ function scrollToEnd(elementId: string) {
           <div v-if="chatStore.chatHistory.length === 0" class="flex flex-col items-center justify-center h-full text-center py-8 sm:py-12">
             <Icon name="simple-icons:ollama" size="48" class="sm:w-16 sm:h-16 text-gray-600 mb-4" />
             <h2 class="text-xl sm:text-2xl font-bold text-gray-300 mb-2">Welcome to Ol-Chat</h2>
-            <p class="text-sm sm:text-base text-gray-500 mb-4 px-4">Start a conversation with your {{selectedTag.name}}</p>
+            <p class="text-sm sm:text-base text-gray-500 mb-4 px-4">Start a conversation with your {{selectedTag?.name}}</p>
             <div v-if="!selectedTag?.model" class="text-yellow-500 text-xs sm:text-sm px-4">
               Please select a model from the dropdown above to begin
             </div>
