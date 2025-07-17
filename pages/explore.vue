@@ -75,8 +75,8 @@ const models: Tag[] = [{
   <div
       class="flex flex-col overflow-y-auto overflow-x-hidden scroll-smooth w-full h-full scrollbar scrollbar-thumb-slate-900 scrollbar-track-transparent pb-4">
     <div class="w-1/2 flex flex-col self-center">
-      <div class="text-center text-5xl text-white mt-6">GPTs</div>
-      <div class="text-center text-gray-400 mt-2">Discover and create custom versions of ChatGPT that combine
+      <div class="text-center text-5xl text-white mt-6">SLMs</div>
+      <div class="text-center text-gray-400 mt-2">Discover and create custom versions of SLMs that combine
         instructions, extra knowledge, and any
         combination of skills.
       </div>
