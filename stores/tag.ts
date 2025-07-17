@@ -9,8 +9,9 @@ export const useTagStore = defineStore('tagStore', {
     actions: {
         async fetchAll() {
             const toastStore = useToastStore()
+            const { endpoints } = useOllama()
             try {
-                const data = await $fetch<{ models: Tag[] }>('http://localhost:11434/api/tags')
+                const data = await $fetch<{ models: Tag[] }>(endpoints.tags)
                 this.tags = data.models
                 this.selectedTag = data.models[0]
             } catch (error: Error | any) {

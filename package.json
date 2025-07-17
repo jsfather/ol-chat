@@ -17,6 +17,7 @@
     "highlight.js": "^11.11.1",
     "markdown-it": "^14.1.0",
     "nuxt": "^3.12.4",
+    "ollama": "^0.5.16",
     "pinia": "^2.2.2",
     "vue": "latest"
   },
